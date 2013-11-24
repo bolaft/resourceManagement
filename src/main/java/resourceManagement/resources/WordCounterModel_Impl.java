@@ -65,7 +65,6 @@ public final class WordCounterModel_Impl implements WordCounterModel, SharedReso
 		return total;
 	}
 
-
 	/***/
 	public void load(DataResource aData) throws ResourceInitializationException {
 		System.out.println(getClass().getSimpleName()+": load +1");
@@ -83,11 +82,11 @@ public final class WordCounterModel_Impl implements WordCounterModel, SharedReso
 		System.out.println("Total word count: " + getTotalCounter());
 	}
 
-
 	/**
 	 * Save the content of the resource as a CSV file
 	 * a line per word, word and counter as columns with tab character as separator
-	 * use the MiscUtil.writeToFS(textString,filenameString) */
+	 * use the MiscUtil.writeToFS(textString,filenameString) 
+	 */
 	public synchronized void save(String filename) {
 		if (saved) return;
 		
@@ -101,7 +100,4 @@ public final class WordCounterModel_Impl implements WordCounterModel, SharedReso
 		
 		saved = true;
 	}
-
-
-
 }
