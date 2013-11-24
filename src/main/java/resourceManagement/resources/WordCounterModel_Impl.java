@@ -20,6 +20,8 @@ import resourceManagement.util.MiscUtil;
 public final class WordCounterModel_Impl implements WordCounterModel, SharedResourceObject {
 	private Map<String,Integer> wordCounterMap;
 
+	private Boolean saved = false;
+	
 	final static private int initialValue = 0;
 	final static private int incrementValue = 1;
 
@@ -53,7 +55,15 @@ public final class WordCounterModel_Impl implements WordCounterModel, SharedReso
 	}
 
 	/** Get the sum of all word counters */
-	// TODO public synchronized Integer getTotalCounter() {}
+	public synchronized Integer getTotalCounter() {
+		int total = 0;
+		
+		for (String word : keySet()){
+			total += get(word);
+		}
+		
+		return total;
+	}
 
 
 	/***/
@@ -69,10 +79,18 @@ public final class WordCounterModel_Impl implements WordCounterModel, SharedReso
 		for (String word : keySet()) {
 			System.out.printf("word >%s< count>%d<\n", word, get(word));
 		}
-		// TODO echo the sum of all word counters
+		
+		System.out.println("Total word count: " + getTotalCounter());
 	}
-	
+
+
+	/**
+	 * Save the content of the resource as a CSV file
+	 * a line per word, word and counter as columns with tab character as separator
+	 * use the MiscUtil.writeToFS(textString,filenameString) */
 	public synchronized void save(String filename) {
+		if (saved) return;
+		
 		String csv = "";
 		
 		for (String word : keySet()) {
@@ -80,13 +98,9 @@ public final class WordCounterModel_Impl implements WordCounterModel, SharedReso
 		}
 		
 		MiscUtil.writeToFS(csv, filename);
+		
+		saved = true;
 	}
-
-	/**
-	 * Save the content of the resource as a CSV file
-	 * a line per word, word and counter as columns with tab character as separator
-	 * use the MiscUtil.writeToFS(textString,filenameString) */
-	// TODO public synchronized void save(String filename) {}
 
 
 

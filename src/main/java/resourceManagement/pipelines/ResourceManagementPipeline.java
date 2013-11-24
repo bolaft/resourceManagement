@@ -66,7 +66,7 @@ public class ResourceManagementPipeline {
 		
 		ExternalResourceDescription collocationNetworkResourceDesc = createExternalResourceDescription(
 				CollocationNetworkModel_Impl.class, 
-				"file:" + CollocationNetworkBuilderAnnotator.resource_path
+				"file:" + CollocationNetworkBuilderAnnotator.LOAD_PATH
 		);
 		
 		// Binding external resource to each Annotator individually

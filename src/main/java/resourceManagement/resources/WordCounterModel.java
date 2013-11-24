@@ -27,7 +27,7 @@ public interface WordCounterModel {
 	public Set<String> keySet();
 	
 	/** Get the sum of all word counters */
-	// TODO public Integer getTotalCounter();
+	public Integer getTotalCounter();
 
 	/** Display the content of the current word counter */
 	public void echo();

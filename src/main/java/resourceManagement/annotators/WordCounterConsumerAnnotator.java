@@ -21,7 +21,7 @@ public class WordCounterConsumerAnnotator extends JCasAnnotator_ImplBase {
 	@ExternalResource(key = RES_KEY)
 	private WordCounterModel wordCounter;
 
-	// TODO define a configuration parameter for resourceDestFilename
+	private String resourceDestFilename = "word_counts.csv";
 	
 	@Override
 	public void process(JCas aJCas) throws AnalysisEngineProcessException {
@@ -34,8 +34,7 @@ public class WordCounterConsumerAnnotator extends JCasAnnotator_ImplBase {
 		// of the SharedModel is used in both Annotator instances.
 		System.out.println(getClass().getSimpleName() + ": " + wordCounter);
 		wordCounter.echo();
-		wordCounter.save("word_counts.csv");
-		// TODO wordCounter.save(resourceDestFilename); // with resourceDestFilename to define...
-
+		
+		wordCounter.save(resourceDestFilename);
 	}
 }
