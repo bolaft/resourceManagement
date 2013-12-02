@@ -61,7 +61,7 @@ public class ResourceManagementPipeline {
 		
 		ExternalResourceDescription wordCounterResourceDesc = createExternalResourceDescription(
 				WordCounterModel_Impl.class, 
-				new File("pipo.bin")
+				new File("pipo2.bin")
 		);
 		
 		ExternalResourceDescription collocationNetworkResourceDesc = createExternalResourceDescription(

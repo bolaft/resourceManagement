@@ -25,7 +25,9 @@ public class WordCounterConsumerAnnotator extends JCasAnnotator_ImplBase {
 	
 	@Override
 	public void process(JCas aJCas) throws AnalysisEngineProcessException {
-		
+
+		System.out.println(getClass().getSimpleName() + ": " + wordCounter);
+		wordCounter.echo();
 	}
 	
 	@Override
