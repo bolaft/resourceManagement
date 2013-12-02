@@ -32,12 +32,9 @@ public interface WordCounterModel {
 	/** Display the content of the current word counter */
 	public void echo();
 	
-	public void save(String filename);
-
 	/**
 	 * Save the content of the resource as a CSV file
 	 * a line per word, word and counter as columns with tab character as separator
 	 * use the MiscUtil.writeToFS(textString,filenameString) */
-	// TODO public void save(String filename);
-
+	public synchronized void save(String filename);
 }

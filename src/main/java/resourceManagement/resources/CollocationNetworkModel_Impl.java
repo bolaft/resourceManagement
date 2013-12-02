@@ -19,23 +19,23 @@ import resourceManagement.util.MiscUtil;
 public class CollocationNetworkModel_Impl implements CollocationNetworkModel, SharedResourceObject {
 	private Map<String, Map<String, Double>> collocationNetwork = new HashMap<String, Map<String, Double>>();
 
-	public void addPair(String word, String nextWord, boolean lookBack) {
+	public void addPair(String word, String colWord, boolean lookBack) {
 		if (collocationNetwork.containsKey(word)){
 			Map<String, Double> wordMap = collocationNetwork.get(word);
 			
-			if (wordMap.containsKey(nextWord)){
-				wordMap.put(nextWord, wordMap.get(nextWord) + 1);
+			if (wordMap.containsKey(colWord)){
+				wordMap.put(colWord, wordMap.get(colWord) + 1);
 			} else {
-				wordMap.put(nextWord, 1.0);
+				wordMap.put(colWord, 1.0);
 			}
 		} else {
 			Map<String, Double> initMap = new HashMap<String, Double>();
-			initMap.put(nextWord, 1.0);
+			initMap.put(colWord, 1.0);
 			collocationNetwork.put(word, initMap);
 		}
 		
 		if (lookBack) {
-			addPair(nextWord, word, false);
+			addPair(colWord, word, false);
 		}
 	}
 	
@@ -98,10 +98,10 @@ public class CollocationNetworkModel_Impl implements CollocationNetworkModel, Sh
         Double total = 0.0;
         
         for (String word : words) {
-            Double w1count = word1.get(word);
-            Double w2count = word2.get(word);
+            Double w1count = word1.get(word) == null ? 0.0 : word1.get(word);
+            Double w2count = word2.get(word) == null ? 0.0 : word2.get(word);
             
-            total = total + w1count * w2count;
+            total += w1count * w2count;
         }
         
         return total / (Math.sqrt(word1.size()) * Math.sqrt(word2.size()));
